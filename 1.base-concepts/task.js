@@ -21,6 +21,7 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
   let P = (percent / 100) / 12;
   let S = amount - contribution;
   let monthlyPayment = S * (P + (P / (((1 + P)**countMonths) - 1)));
-  let summ = ((monthlyPayment * countMonths).toFixed(2))
+  let summ = ((monthlyPayment * countMonths).toFixed(2));
+  summ = Number(summ);
   return summ;
 }

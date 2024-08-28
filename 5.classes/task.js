@@ -129,12 +129,16 @@ class Student {
     }
 
     getAverage(){
+        if (Object.keys(this.marks).length === 0){
+            return 0;
+        } else {
         let sum = 0;
             for(let subject in this.marks){
                 let subjectSum = this.marks[subject].reduce((acc, mark) => acc + mark,0);
                 sum += (subjectSum / this.marks[subject].length);
         }
         return sum / Object.keys(this.marks).length;
+      }
     }
     
 }

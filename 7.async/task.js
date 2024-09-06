@@ -33,7 +33,7 @@ class AlarmClock {
 
     start() {
         if(this.intervalId !== null) {
-            return
+            return;
         }
 
         this.intervalId = setInterval(() => {

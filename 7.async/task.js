@@ -8,6 +8,7 @@ class AlarmClock {
         if (!time || !callback) {
             throw new Error("Отсутствуют обязательные аргументы");
         }
+        
         if(time in (this.alarmCollection.map(object => object.time))) {
             console.warn("Уже присутствует звонок на это же время");
         }

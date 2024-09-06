@@ -5,8 +5,7 @@ class AlarmClock {
     }
 
     addClock(time, callback) {
-        // if(arguments.length === 1 || arguments.length === 0) {
-        if (time === null || callback === undefined) {
+        if (!time || !callback) {
             throw new Error("Отсутствуют обязательные аргументы");
         }
         if(time in (this.alarmCollection.map(object => object.time))) {
@@ -26,27 +25,25 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime(){
-        let currentDate = new Date;
-        const hour = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-        if (minutes < 10){
-            return String(hour + ":0" + minutes);
-        } else {return String(hour + ":" + minutes);}
+        return new Date().toLocaleTimeString("ru-Ru", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
     }
 
     start() {
-        if(this.intervalId === null) {
+        if(this.intervalId !== null) {
             return
         }
 
         this.intervalId = setInterval(() => {
             this.alarmCollection.forEach((object) => {
-                if(object.time === getCurrentFormattedTime() && object.canCall) {
+                if(object.time === this.getCurrentFormattedTime() && object.canCall) {
                     object.canCall = false;
                     object.callback();
                 }
             })
-        }, 1000)
+        },1000)
     }
 
     stop() {
